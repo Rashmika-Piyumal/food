@@ -1,8 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const connectDB = require("./config/db");
 
-dotenv.config();
+dotenv.config({ quiet: true });
+
+connectDB().catch((err) => {
+  console.error("MongoDB connection error:", err.message);
+  process.exit(1);
+});
 
 const app = express();
 
