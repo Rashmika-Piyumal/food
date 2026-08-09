@@ -26,6 +26,7 @@ function RestaurantDetail() {
     try {
       await api.post("/cart", { menuItemId, quantity: 1 });
       setStatusMessage("Added to cart");
+      window.dispatchEvent(new Event("foodexpress:cart-changed"));
     } catch (err) {
       if (err.response?.status === 401) {
         navigate("/login");

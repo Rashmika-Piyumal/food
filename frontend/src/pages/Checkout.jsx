@@ -16,6 +16,7 @@ function Checkout() {
     try {
       const res = await api.post("/orders", { deliveryAddress });
       setConfirmedOrder(res.data.data);
+      window.dispatchEvent(new Event("foodexpress:cart-changed"));
     } catch (err) {
       if (err.response?.status === 401) {
         navigate("/login");

@@ -32,11 +32,13 @@ function Cart() {
     if (quantity < 1) return;
     await api.put(`/cart/${menuItemId}`, { quantity });
     loadCart();
+    window.dispatchEvent(new Event("foodexpress:cart-changed"));
   };
 
   const removeItem = async (menuItemId) => {
     await api.delete(`/cart/${menuItemId}`);
     loadCart();
+    window.dispatchEvent(new Event("foodexpress:cart-changed"));
   };
 
   const total = items.reduce((sum, item) => sum + item.menuItemId.price * item.quantity, 0);

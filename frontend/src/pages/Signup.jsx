@@ -18,6 +18,7 @@ function Signup() {
       const res = await api.post("/auth/signup", { name, email, password });
       localStorage.setItem("token", res.data.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.data.user));
+      window.dispatchEvent(new Event("foodexpress:auth-changed"));
       navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
